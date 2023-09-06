@@ -10,7 +10,7 @@ cd ~/bin
 ./nvim.appimage --appimage-extract
 #echo "# Neovim alias" >> ~/.zshrc
 #echo "alias nvim=\"$HOME/bin/nvim.appimage\"" >> ~/.zshrc
-echo "alias nvim=$HOME/bin/squashfs-root/AppRun" >> .bashrc
+echo "alias nvim=$HOME/bin/squashfs-root/AppRun" >> ~/.bashrc
 
 mkdir -p $HOME/.config
 
@@ -19,6 +19,9 @@ git clone https://github.com/krlspj/nvim-config.git nvim
 cd nvim
 git checkout develop_42
 rm -rf .git
+
+echo "going home ^^"
+cd $HOME
 
 exec $SHELL
 
