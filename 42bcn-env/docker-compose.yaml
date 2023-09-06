@@ -1,0 +1,10 @@
+version: '3'
+services:
+  my-debian-container:
+    image: debian:latest
+    container_name: 42bcn-env
+    volumes:
+      - ./install-scripts:/install-scripts
+      - ./shared-data:/shared-data
+    command: /bin/bash -c "cd /install-scripts && ./setup.sh && tail -f /dev/null"
+
