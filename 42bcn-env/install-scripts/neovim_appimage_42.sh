@@ -9,6 +9,7 @@ chmod +x ~/bin/nvim.appimage
 cd ~/bin
 ./nvim.appimage --appimage-extract
 echo "alias nvim=$HOME/bin/squashfs-root/AppRun" >> ~/.bashrc
+rm nvim.appimage
 
 mkdir -p $HOME/.config
 
