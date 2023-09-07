@@ -7,7 +7,7 @@ echo ">> install packages"
 apt-get -y install git xsel python3-pip python3-venv 
 apt-get -y install gcc clang libpq-dev libbsd-dev libncurses-dev valgrind
 
-cd /root
+cd $HOME
 python3 -m venv ./venv
 
 echo ">> to activate python virtual environment: source $HOME/venv/bin/activate"
