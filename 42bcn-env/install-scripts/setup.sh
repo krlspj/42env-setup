@@ -24,6 +24,9 @@ cd
 git clone --recursive https://github.com/xicodomingues/francinette.git francinette
 pip3 install -r francinette/requirements.txt
 
+echo ">> install and configure neovim for 42"
+/install-scripts/neovim_appimage.sh
+
 echo ">> add aliases to .bashrc"
 echo "alias pingu-is-life=\"source $HOME/venv/bin/activate\"" >> $HOME/.bashrc
 echo "alias mcheck=$HOME/francinette/tester.sh" >> $HOME/.bashrc
