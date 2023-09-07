@@ -10,6 +10,8 @@ cd ~/bin
 ./nvim.appimage --appimage-extract
 echo "alias nvim=$HOME/bin/squashfs-root/AppRun" >> ~/.bashrc
 rm nvim.appimage
+echo "set neovim as git editor"
+/install-scripts/save_to_fileRC.sh "export GIT_EDITOR=$HOME/bin/squashfs-root/AppRun"
 
 mkdir -p $HOME/.config
 
