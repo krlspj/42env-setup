@@ -3,6 +3,8 @@ services:
   my-debian-container:
     image: debian:latest
     container_name: 42bcn-env
+    env_file:
+      - 42variables.env
     volumes:
       - ./install-scripts:/install-scripts
       - ./shared-data:/shared-data
