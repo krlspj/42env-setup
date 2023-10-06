@@ -18,6 +18,9 @@ tar -xf /tmp/nvim-linux64.tar.gz -C /tmp
 #if all is correct procedde with installation
 #add alias to RC_FILE
 
+#add alias function to remove aliases
+
+
 #clean nvim
 
 # # required
