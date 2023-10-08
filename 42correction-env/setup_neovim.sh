@@ -4,31 +4,86 @@ echo "install neovim for mac"
 MAC_LINK=https://github.com/neovim/neovim/releases/latest/download/nvim-macos.tar.gz
 LINUX_LINK=https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 RC_FILE=.zshrc
+NEOVIM_CONFIG_DIR="$HOME/.config/nvim"
+DOWNLOAD_LINK=""
+sys_name=""
+
+# Get the system name
+os_name=$(uname -s)
+
+# Check if it's Linux or Darwin
+if [ "$os_name" == "Linux" ]; then
+	sys_name="Linux"
+	DOWNLOAD_LINK=$LINUX_LINK
+
+elif [ "$os_name" == "Darwin" ]; then
+	sys_name="macOS"
+	DOWNLOAD_LINK=$MAC_LINK
+else
+    sys_name="Unknown"
+	DOWNLOAD_LINK=$MAC_LINK
+fi
+# Now you can use the sys_name variable outside the if statement
+echo "Detected operating system: $sys_name"
+
+if command -v nvim &> /dev/null; then
+    echo "neovim already exists in this system, exit process, and system's user permission"
+    exit 1
+else
+    echo "Neovim (nvim) is not installed. Install it first."
+fi
+
+if [ -d "$NEOVIM_CONFIG_DIR" ]; then
+    echo "The ~/.config/nvim folder already exists. Exiting the script."
+    exit 1
+else
+    echo "The ~/.config/nvim folder does not exist. Continuing..."
+fi
 
 #wget -P /tmp $MAC_LINK
 #tar -xf /tmp/nvim-macos.tar.gz -C /tmp
-#wget -P /tmp $LINUX_LINK
+wget -P /tmp $LINUX_LINK
 tar -xf /tmp/nvim-linux64.tar.gz -C /tmp
-# check if path exists. if does, stop process since there can be an already configured neovim
-#mv ~/.config/nvim{,.bak}
-# optional but recommended
-#mv ~/.local/share/nvim{,.bak}
-#mv ~/.local/state/nvim{,.bak}
-#mv ~/.cache/nvim{,.bak}
-#if all is correct procedde with installation
-#add alias to RC_FILE
+echo "alias nvim=/tmp/nvim-linux64/bin/nvim" >> ~/RC_FILE
+#echo "alias nvim=/tmp/nvim-macos/bin/nvim" >> ~/RC_FILE
 
-#add alias function to remove aliases
+# Directories to check
+directories=("~/.config/nvim" "~/.local/share/nvim" "~/.local/state/nvim" "~/.cache/nvim")
 
+# Check if any directory exists
+for dir in "${directories[@]}"; do
+    if [ -d "$dir" ]; then
+        echo "One of the directories already exists: $dir"
+        exit 1  # Exit the script with an error code
+    fi
+done
 
-#clean nvim
+# Continue with the rest of your script if no directories exist
+echo "No existing directories found. Proceeding with the script."
 
-# # required
-#rm ~/.config/nvim{,.bak}
-# optional but recommended
-#rm ~/.local/share/nvim{,.bak}
-#rm ~/.local/state/nvim{,.bak}
-#rm ~/.cache/nvim{,.bak}
-#rm -rf ~/.config/nvim/.git
+mkdir -p $HOME/.config
+
+cd ~/.config
+git clone https://github.com/krlspj/nvim-config.git nvim
+cd nvim
+git checkout develop_42
+
+# add alias function to remove aliases
+#kr-fclean 
+echo 'alias kr_fclean='"'"'
+# Remove the remove_stuff alias and associated commands from .zshrc
+sed -i "/^alias kr_fclean=/,/^eofkr_fclean$/d" ~/.zshrc
+sed -i '/^alias nvim=\/tmp\/nvim-/d' ~/.zshrc
+
+# Remove ~/.config/nvim, ~/.local/share/nvim, ~/.local/state/nvim, ~/.cache/nvim
+#rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+#rm -rf ~/.config/nvim
+
+# Save the changes to .zshrc
+#source ~/.zshrc
+#eofkr_fclean'"'" >> ~/$RC_FILE
+
+source ~/$RC_FILE
+
 echo "configure neovim"
-echo "COMMAND to remove neovim and its packages"
+echo "run kr_fclean to remove neovim and its configuration"
