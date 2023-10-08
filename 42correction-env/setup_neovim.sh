@@ -44,11 +44,6 @@ else
     echo "The ~/.config/nvim folder does not exist. Continuing..."
 fi
 
-#wget -P /tmp $MAC_LINK
-wget -P /tmp $DOWNLOAD_LINK
-tar -xf /tmp/$file_name.tar.gz -C /tmp
-echo "alias nvim=/tmp/$file_name/bin/nvim" >> ~/$RC_FILE
-
 # Directories to check
 directories=("$HOME/.config/nvim" "~$HOME/.local/share/nvim" "~$HOME/.local/state/nvim" "$HOME/.cache/nvim")
 
@@ -62,6 +57,12 @@ done
 
 # Continue with the rest of your script if no directories exist
 echo "No existing directories found. Proceeding with the script."
+
+
+
+wget -P /tmp $DOWNLOAD_LINK
+tar -xf /tmp/$file_name.tar.gz -C /tmp
+echo "alias nvim=/tmp/$file_name/bin/nvim" >> ~/$RC_FILE
 
 mkdir -p $HOME/.config
 
@@ -87,5 +88,4 @@ rm -rf /tmp/nvim*
 
 exec $SHELL
 
-echo "configure neovim"
 echo "run kr_fclean to remove neovim and its configuration"
