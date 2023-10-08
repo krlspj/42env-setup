@@ -7,6 +7,7 @@ RC_FILE=.zshrc
 NEOVIM_CONFIG_DIR="$HOME/.config/nvim"
 DOWNLOAD_LINK=""
 sys_name=""
+file_name=""
 
 # Get the system name
 os_name=$(uname -s)
@@ -14,13 +15,16 @@ os_name=$(uname -s)
 # Check if it's Linux or Darwin
 if [ "$os_name" == "Linux" ]; then
 	sys_name="Linux"
+	file_name="nvim-linux64"
 	DOWNLOAD_LINK=$LINUX_LINK
 
 elif [ "$os_name" == "Darwin" ]; then
 	sys_name="macOS"
+	file_name="nvim-macos"
 	DOWNLOAD_LINK=$MAC_LINK
 else
     sys_name="Unknown"
+	file_name="nvim-macos"
 	DOWNLOAD_LINK=$MAC_LINK
 fi
 # Now you can use the sys_name variable outside the if statement
@@ -30,7 +34,7 @@ if command -v nvim &> /dev/null; then
     echo "neovim already exists in this system, exit process, and system's user permission"
     exit 1
 else
-    echo "Neovim (nvim) is not installed. Install it first."
+    echo "Neovim is not installed. Install it first."
 fi
 
 if [ -d "$NEOVIM_CONFIG_DIR" ]; then
@@ -41,14 +45,12 @@ else
 fi
 
 #wget -P /tmp $MAC_LINK
-#tar -xf /tmp/nvim-macos.tar.gz -C /tmp
-wget -P /tmp $LINUX_LINK
-tar -xf /tmp/nvim-linux64.tar.gz -C /tmp
-echo "alias nvim=/tmp/nvim-linux64/bin/nvim" >> ~/RC_FILE
-#echo "alias nvim=/tmp/nvim-macos/bin/nvim" >> ~/RC_FILE
+wget -P /tmp $DOWNLOAD_LINK
+tar -xf /tmp/$file_name.tar.gz -C /tmp
+echo "alias nvim=/tmp/$file_name/bin/nvim" >> ~/$RC_FILE
 
 # Directories to check
-directories=("~/.config/nvim" "~/.local/share/nvim" "~/.local/state/nvim" "~/.cache/nvim")
+directories=("$HOME/.config/nvim" "~$HOME/.local/share/nvim" "~$HOME/.local/state/nvim" "$HOME/.cache/nvim")
 
 # Check if any directory exists
 for dir in "${directories[@]}"; do
@@ -73,17 +75,17 @@ git checkout develop_42
 echo 'alias kr_fclean='"'"'
 # Remove the remove_stuff alias and associated commands from .zshrc
 sed -i "/^alias kr_fclean=/,/^eofkr_fclean$/d" ~/.zshrc
-sed -i '/^alias nvim=\/tmp\/nvim-/d' ~/.zshrc
+sed -i "/^alias nvim=\/tmp\/nvim-/d" ~/.zshrc
 
 # Remove ~/.config/nvim, ~/.local/share/nvim, ~/.local/state/nvim, ~/.cache/nvim
-#rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
-#rm -rf ~/.config/nvim
+rm -rf $HOME/.config/nvim $HOME/.local/share/nvim $HOME/.local/state/nvim $HOME/.cache/nvim
+rm -rf /tmp/nvim*
 
 # Save the changes to .zshrc
 #source ~/.zshrc
 #eofkr_fclean'"'" >> ~/$RC_FILE
 
-source ~/$RC_FILE
+exec $SHELL
 
 echo "configure neovim"
 echo "run kr_fclean to remove neovim and its configuration"
