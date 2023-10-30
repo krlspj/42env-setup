@@ -1,4 +1,5 @@
 #!/bin/bash
+RC_FILE=.zshrc
 
 echo ">> update system"
 apt-get update && apt-get -y upgrade
@@ -27,10 +28,10 @@ pip3 install -r francinette/requirements.txt
 echo ">> install and configure neovim for 42"
 /install-scripts/neovim_appimage_42.sh
 
-echo ">> add aliases to .bashrc"
-echo "alias pingu-is-life=\"source $HOME/venv/bin/activate\"" >> $HOME/.bashrc
-echo "alias mcheck=$HOME/francinette/tester.sh" >> $HOME/.bashrc
-echo "alias mc=$HOME/francinette/tester.sh" >> $HOME/.bashrc
+echo ">> add aliases to $RC_FILE"
+echo "alias pingu-is-life=\"source $HOME/venv/bin/activate\"" >> $HOME/$RC_FILE
+echo "alias mcheck=$HOME/francinette/tester.sh" >> $HOME/$RC_FILE
+echo "alias mc=$HOME/francinette/tester.sh" >> $HOME/$RC_FILE
 
 echo "=== INSTRUCTIONS ==="
 echo ""
