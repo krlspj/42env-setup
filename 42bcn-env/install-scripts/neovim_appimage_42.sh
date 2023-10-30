@@ -3,7 +3,7 @@
 apt-get -y install wget unzip
 
 mkdir -p ~/bin
-wget -O ~/bin/nvim.appimage https://github.com/neovim/neovim/releases/download/v0.9.1/nvim.appimage
+wget -O ~/bin/nvim.appimage https://github.com/neovim/neovim/releases/download/v0.9.4/nvim.appimage
 chmod +x ~/bin/nvim.appimage
 
 cd ~/bin
