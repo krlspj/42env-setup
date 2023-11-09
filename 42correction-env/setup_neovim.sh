@@ -60,7 +60,9 @@ echo "No existing directories found. Proceeding with the script."
 
 
 
-wget -P /tmp $DOWNLOAD_LINK
+#wget -P /tmp $DOWNLOAD_LINK
+curl -L -o /tmp/nvim-macos.tar.gz $DOWNLOAD_LINK
+
 tar -xf /tmp/$file_name.tar.gz -C /tmp
 echo "alias nvim=/tmp/$file_name/bin/nvim" >> ~/$RC_FILE
 
