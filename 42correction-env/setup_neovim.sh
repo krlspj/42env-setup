@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "check if neovim exists"
-echo "install neovim for mac"
 MAC_LINK=https://github.com/neovim/neovim/releases/download/v0.9.2/nvim-macos.tar.gz
 LINUX_LINK=https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 RC_FILE=.zshrc
