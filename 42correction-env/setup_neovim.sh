@@ -88,6 +88,8 @@ rm -rf /tmp/nvim*
 #source ~/.zshrc
 #eofkr_fclean'"'" >> ~/$RC_FILE
 
+echo "run kr_fclean to remove neovim and its configuration"
+
 exec $SHELL
 
-echo "run kr_fclean to remove neovim and its configuration"
+
