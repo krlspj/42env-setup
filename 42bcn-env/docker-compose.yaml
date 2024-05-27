@@ -1,4 +1,3 @@
-version: '3'
 services:
   my-debian-container:
     image: debian:latest
