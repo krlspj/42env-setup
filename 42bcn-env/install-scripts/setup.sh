@@ -10,9 +10,6 @@ apt-get -y install git xsel python3-pip python3-venv
 apt-get -y install gcc clang libpq-dev libbsd-dev libncurses-dev
 
 cd $HOME
-
-/install-scripts/valgrind.sh
-
 python3 -m venv ./venv
 
 echo ">> to activate python virtual environment: source $HOME/venv/bin/activate"
@@ -36,6 +33,10 @@ echo "alias tmux=\"TERM=xterm-256color tmux\"" >> $HOME/$RC_FILE
 
 echo ">> install and configure neovim for 42"
 /install-scripts/neovim_appimage_42.sh
+
+/install-scripts/valgrind.sh
+
+/install-scripts/grademe_setup.sh
 
 echo ">> add aliases to $RC_FILE"
 echo "alias pingu-is-life=\"source $HOME/venv/bin/activate\"" >> $HOME/$RC_FILE

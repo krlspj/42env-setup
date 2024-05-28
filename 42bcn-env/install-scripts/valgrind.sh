@@ -9,3 +9,5 @@ cd valgrind-3.23.0
 make
 make install
 
+rm valgrind-3.23.0.tar.bz2
+rm -rf valgrind-3.23.0
