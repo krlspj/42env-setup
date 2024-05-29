@@ -1,16 +1,17 @@
 syntax on
 set number
+color habamax
 "set relativenumber
 
 " Automatically close parentheses, brackets, and braces
-inoremap ( ()<Left>
-inoremap [ []<Left>
+"inoremap ( ()<Left>
+"inoremap [ []<Left>
 inoremap { {}<Left>
-inoremap < <><Left>
+"inoremap < <><Left>
 
 " Automatically close quotes
-inoremap ' ''<Left>
-inoremap " ""<Left>
+"inoremap ' ''<Left>
+"inoremap " ""<Left>
 
 " Optionally, automatically close backticks
 inoremap ` ``<Left>
@@ -25,7 +26,7 @@ set smartindent
 filetype plugin indent on
 
 " Enable file type detection
-filetype plugin on
+"filetype plugin on
 
 " Set shift width to 4 spaces (or your preferred indentation level)
 set shiftwidth=4
@@ -38,4 +39,6 @@ set expandtab
 
 " Custom mappings for better bracket indentation
 inoremap {<CR> {<CR>}<Esc>O
+
+highlight MatchParen ctermfg=NONE ctermbg=yellow guifg=NONE guibg=yellow
 
