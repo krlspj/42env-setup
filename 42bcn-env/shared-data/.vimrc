@@ -24,6 +24,9 @@ set smartindent
 " Enable file type detection which often includes indentation rules
 filetype plugin indent on
 
+" Enable file type detection
+filetype plugin on
+
 " Set shift width to 4 spaces (or your preferred indentation level)
 set shiftwidth=4
 
